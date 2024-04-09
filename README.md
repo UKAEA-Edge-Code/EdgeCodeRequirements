@@ -2,16 +2,17 @@
 
 There are two broad goals of the project:
 1. Create a SOLPS-EIRENE replacement, which involves a neutral particle solver coupled to a Braginskii code.
-    - This will be a modern replacement of SOLPS that is faster, better engineered, and ultimately more flexible offering more physical interpretation.
-3. Build a framework for running non-linear drift- and gyro-kinetic simulations based upon the moment-kinetics numerical method.
+    - This will be a modern replacement of SOLPS that is more productive by being a combination of: faster; better engineered and easier to develop; algorithmically capable; and having more physics.
+2. Build a framework for running non-linear drift- and gyro-kinetic simulations based upon the moment-kinetics numerical method.
     - This will enable simulations of large high power tokamaks in H-mode, for the calculation of fluxes that are subsequently fed into the SOLPS replacement.
 
+With this in mind here are some requirements of the producivity framework that we need to choose to get here faster.
 
 ## Solver framework
 
 | General | Reason | Option 1 |
 | -------- | -------- | -------- |
-| Is enjoyable to use | People have to like what they do    | FireDrake, FENICs, MOOSE, AMRpX |
+| Is enjoyable to use | People have to like what they do    | FireDrake, FENICs, MOOSE, AMRpX, jax |
 | Well engineered | Makes it easier to learn the codebase     | Text     |
 | Large user base | Accessible experience     | Text     |
 | Mature and not fading | Can't choose abandonware     | Text     |
