@@ -51,6 +51,7 @@ There are two broad goals of the project:
 | -------- | -------- | -------- |
 | Scales well | We don't want to spend money getting it into the middle of tha pack in terms of scalability     | Text     |
 | Uses well known parallelisation techniques | We want to use what others use  | Text     |
+| Has access to well known and easy to use preconditioners | Important for accuracy and speed | Text     |
 
 | Gridding | Reason | Option 1 |
 | -------- | -------- | -------- |
