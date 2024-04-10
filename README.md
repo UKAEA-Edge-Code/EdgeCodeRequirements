@@ -6,7 +6,7 @@ There are two broad goals of the project:
 2. Build a framework for running non-linear drift- and gyro-kinetic simulations based upon the moment-kinetics numerical method.
     - This will enable simulations of large high power tokamaks in H-mode, for the calculation of fluxes that are subsequently fed into the SOLPS replacement.
 
-With this in mind here are some requirements of the producivity framework that we need to choose to get here faster.
+With this in mind here are some requirements of the productivity framework that we need to choose to get here faster.
 
 ## Solver framework
 
@@ -24,7 +24,7 @@ With this in mind here are some requirements of the producivity framework that w
 | In a sensible language(s)                                       | Need to choose a language that can access different                                    | Text                                 |
 | Has an escape hatch to low level interfaces (if applicable)     | Code generation techniques can be a big barrier to implementing unsupported capability | Text                                 |
 | Is performance portable                                         | Got to run on different vendors' hardware                                              | Text                                 |
-| Low level code is understandable (if applicable)                | C++ or code generation must be legible and undertandable                               | Text                                 |
+| Low level code is understandable (if applicable)                | C++ or code generation must be legible and understandable                              | Text                                 |
 | Code generation is not insurmountably difficult (if applicable) | We need to understand how to work with it                                              | Text                                 |
 | Is differentiable                                               | Nice-to-have                                                                           | Text                                 |
 
@@ -56,10 +56,10 @@ With this in mind here are some requirements of the producivity framework that w
 
 | Gridding                                     | Reason                                                 | Option 1        |
 | -------------------------------------------- | ------------------------------------------------------ | --------------- |
-| Supports multiple gridding inputs            | Flexibility and likelihood to continue growing support | For ease of use | Text |
+| Supports multiple gridding inputs            | Flexibility and likelihood to continue growing support | For ease of use |
 | Supports unstructured meshes                 | To have realistic geometries                           | Text            |
 | Supports hanging nodes for DG                | To support FCI                                         | Text            |
-| Can use different elements in one simulation | Tets+hexes+prism often found together                  | Text            | Text |
+| Can use different elements in one simulation | Tets+hexes+prism often found together                  | Text            |
 | h-refinement                                 | Nice-to-have                                           | Speed           |
 | p-refinement                                 | Nice-to-have                                           | Speed / acc     |
 | r-refinement                                 | Nice-to-have                                           | Text            |
@@ -79,7 +79,7 @@ With this in mind here are some requirements of the producivity framework that w
 | Curl                                                      | Text   | Text     |
 | Advection                                                 | Text   | Text     |
 | Diffusion                                                 | Text   | Text     |
-| Anistropic diffusion                                      | Text   | Text     |
+| Anisotropic diffusion                                     | Text   | Text     |
 | Parallel diffusion                                        | Text   | Text     |
 | Perpendicular diffusion                                   | Text   | Text     |
 | Hyper diffusion                                           | Text   | Text     |
