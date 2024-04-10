@@ -27,6 +27,9 @@ With this in mind here are some requirements of the productivity framework that 
 | Low level code is understandable (if applicable)                | C++ or code generation must be legible and understandable                              | Text                                 |
 | Code generation is not insurmountably difficult (if applicable) | We need to understand how to work with it                                              | Text                                 |
 | Is differentiable                                               | Nice-to-have                                                                           | Text                                 |
+| Follows versioning best-practices                               | Need a stable API, reproducible builds                                                 | Text                                 |
+| Has relatively few dependencies                                 | Avoid complicated installation on HPC                                                  | Text                                 |
+| Dependencies build quickly                                      | Speed up development, installation on new platforms                                    | Text                                 |
 
 | Field solvers                                           | Reason                                                                                   | Option 1 |
 | ------------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------- |
