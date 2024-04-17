@@ -30,6 +30,7 @@ With this in mind here are some requirements of the productivity framework that 
 | Follows versioning best-practices                               | Need a stable API, reproducible builds                                                 | UFL interface stable, lower interfaces subject to change.  | Text                      |
 | Has relatively few dependencies                                 | Avoid complicated installation on HPC                                                  | Typical dependencies for FEM frameworks, installing is non-trivial if the installation script fails. Currently does not have spack.      | Text                      |
 | Dependencies build quickly                                      | Speed up development, installation on new platforms                                    | Most of the dependency install is PETSc build.  | Text                      |
+| Pull requests are welcome and dealt with quickly                                   | Our changes will be made upstream                                    | Text  | Text                      |
 
 | Field solvers                                           | Reason                                                                                   | Firedrake |
 | ------------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------- |
