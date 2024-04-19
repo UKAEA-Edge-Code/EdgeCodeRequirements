@@ -90,6 +90,7 @@ With this in mind here are some requirements of the productivity framework that 
 | Poisson bracket                                           | Text   | Text     |
 | Time evolving BCs                                         | Text   | Text     |
 | BCs that depend on solver variables' values and gradients | Text   | Text     |
+| BCs that depend on geometry  | Gradients in arbitrary directions wrt grid  | Text     |
 
 | Use cases                                      | Reason | Option 1 |
 | ---------------------------------------------- | ------ | -------- |
