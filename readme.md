@@ -6,9 +6,29 @@ There are two broad goals of the project:
 2. Build a framework for running non-linear drift- and gyro-kinetic simulations based upon the moment-kinetics numerical method.
     - This will enable simulations of large high power tokamaks in H-mode, for the calculation of fluxes that are subsequently fed into the SOLPS replacement.
 
-With this in mind here are some requirements of the productivity framework that we need to choose to get here faster.
+## Framework evaluation directories
 
-## Solver framework
+- [deal.II, lifeX](./dealII/readme.md) 
+- [DUNE](./DUNE/readme.md)
+- [FELTOR](FELTOR/readme.md)
+- [FEniCSx](FEniCSx/readme.md)
+- [Firedrake](./Firedrake/readme.md)
+- [jax,jax-cfd,jax-fem](./jax/readme.md)
+- [MFEM,pyMFEM](./MFEM/readme.md)
+- [Moose](./MOOSE/readme.md)
+- [Nektar++](./nektar++/readme.md)
+- [NGSolve](./NGSolve/readme.md)
+- [Trixi.jl](./Trixi/readme.md)
+
+## Overview tables
+
+[General info](docs/info)
+
+[Overall ratings](docs/ratings)
+
+## Framework requirements
+
+Some requirements of the productivity framework are:
 
 | General                                                         | Reason                                                                                 | Firedrake  | FENICs, MOOSE, AMRpX, jax   |
 | --------------------------------------------------------------- | -------------------------------------------------------------------------------------- | --------- | ------------------------- |
