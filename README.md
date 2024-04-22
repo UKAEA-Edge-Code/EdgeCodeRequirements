@@ -96,6 +96,7 @@ With this in mind here are some requirements of the productivity framework that 
 | ---------------------------------------------- | ------ | -------- |
 | Has a history of UQ applications               | Text   | Text     |
 | Adjoint methods have been successfully applied | Text   | Text     |
+| Has provenance capture built in for data, config etc | Text   | Text     |
 
 
 
