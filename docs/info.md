@@ -6,7 +6,7 @@
 | :------------------------ | :--------------: | :------------------------: | :---: |
 | deal.II, life<sup>X</sup> | LGPL<sup>+</sup> |            C++             |   N   |
 | DUNE                      | GPL2<sup>*</sup> | C++ (with Python bindings) |   Y   |
-| FELTOR                    |                  |                            |       |
+| FELTOR                    |       MIT        | C++/CUDA (Python bindings) |   N   |
 | FEniCSx                   |       LGPL       | C++ (with Python bindings) |   Y   |
 | Firedrake                 |       LGPL       |  Write Python, Generate C  |   Y   |
 | jax, jax-cfd, jax-fem     |                  |                            |       |
