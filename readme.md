@@ -8,13 +8,13 @@ There are two broad goals of the project:
 
 ## Framework evaluation directories
 
-- [deal.II, lifeX](./dealII/readme.md) 
+- [deal.II, life<sup>X</sup>](./dealII/readme.md) 
 - [DUNE](./DUNE/readme.md)
 - [FELTOR](FELTOR/readme.md)
 - [FEniCSx](FEniCSx/readme.md)
 - [Firedrake](./Firedrake/readme.md)
-- [jax,jax-cfd,jax-fem](./jax/readme.md)
-- [MFEM,pyMFEM](./MFEM/readme.md)
+- [jax, jax-cfd, jax-fem](./jax/readme.md)
+- [MFEM, pyMFEM](./MFEM/readme.md)
 - [Moose](./MOOSE/readme.md)
 - [Nektar++](./nektar++/readme.md)
 - [NGSolve](./NGSolve/readme.md)
@@ -22,9 +22,9 @@ There are two broad goals of the project:
 
 ## Overview tables
 
-[General info](docs/info)
+[General info](docs/info.md)
 
-[Overall ratings](docs/ratings)
+[Overall ratings](docs/ratings.md)
 
 ## Framework requirements
 
@@ -117,7 +117,3 @@ Some requirements of the productivity framework are:
 | Has a history of UQ applications               | Text   | Text     |
 | Adjoint methods have been successfully applied | Text   | Text     |
 | Has provenance capture built in for data, config etc | Text   | Text     |
-
-
-
-

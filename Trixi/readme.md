@@ -19,7 +19,4 @@ Description from the [Trixi project page](https://trixi-framework.github.io/Trix
 
 ## Links
 
-- [Developer guide](https://doc.nektar.info/developerguide/latest/)
 - [GitHub page](https://github.com/trixi-framework/Trixi.jl)
-- [Installation](https://doc.nektar.info/userguide/latest/user-guidech2.html#user-guidese1.
-- [User guide](https://doc.nektar.info/userguide/latest/)html)
