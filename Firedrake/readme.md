@@ -11,7 +11,7 @@ Description from the [Firedrake project page](https://www.firedrakeproject.org/)
 
 - Tight integration with PETSc - effectively write callback functions for it in C, auto-generated from user Python
 - No postproc tools at first glance, just generates vtk and relies on ParaView.
-- Surprisingly difficult to infer from the docs that its doing code gen...
+- Surprisingly difficult to infer from the docs that it's doing code gen...
 - Parallelism all handled under-the-hood; 
 
 ### Installation
@@ -25,4 +25,4 @@ System install of several dependencies...
 - [firedrakeproject/ufl](https://github.com/firedrakeproject/ufl): A fork of [FEniCS/UFL](https://github.com/fenics/ufl).
 - [GitHub page](https://github.com/firedrakeproject/firedrake)
 - [Installation](https://www.firedrakeproject.org/download.html)
-- [Irkesome](https://github.com/firedrakeproject/Irksome): Time-stepping package used to generate Runge Kutta methods for Firedrake
+- [Irksome](https://github.com/firedrakeproject/Irksome): Time-stepping package used to generate Runge Kutta methods for Firedrake

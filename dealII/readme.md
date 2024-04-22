@@ -1,5 +1,5 @@
 [Home](../readme.md)
-# deal.II, life$^X$
+# deal.II, life<sup>X</sup>
 
 ## Overview
 Description from the [deal.II project page](https://fenicsproject.org/):
