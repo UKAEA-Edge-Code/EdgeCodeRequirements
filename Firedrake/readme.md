@@ -29,4 +29,4 @@ System install of several dependencies...
 
 ## Example scripts - benchmark problems
 
-Please see repo [Firedrake framework examples] (https://github.com/ethrelfall/FEM-framework-comparison/tree/main).
+Please see repo (https://github.com/ethrelfall/FEM-framework-comparison/tree/main).
