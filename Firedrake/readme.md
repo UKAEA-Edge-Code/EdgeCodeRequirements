@@ -26,3 +26,7 @@ System install of several dependencies...
 - [GitHub page](https://github.com/firedrakeproject/firedrake)
 - [Installation](https://www.firedrakeproject.org/download.html)
 - [Irksome](https://github.com/firedrakeproject/Irksome): Time-stepping package used to generate Runge Kutta methods for Firedrake
+
+## Example scripts - benchmark problems
+
+Please see repo [Firedrake framework examples] (https://github.com/ethrelfall/FEM-framework-comparison/tree/main).
