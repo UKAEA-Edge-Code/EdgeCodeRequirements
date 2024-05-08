@@ -7,6 +7,23 @@ Description from the [MOOSE project webpage](https://mooseframework.inl.gov/):
 
 > "The Multiphysics Object-Oriented Simulation Environment (MOOSE) is a finite-element, multiphysics framework primarily developed by Idaho National Laboratory. It provides a high-level interface to some of the most sophisticated nonlinear solver technology on the planet. MOOSE presents a straightforward API that aligns well with the real-world problems scientists and engineers need to tackle."
 
+## Test problems
+
+### Advection
+
+Can be done via config file (see ```advection_dg.i```) - the default Moose app has all required features.
+
+Moose doesn't support periodic bounday conditions for Elemental variables, hence
+extended domain doubled size of domain in x direction from [-20,20] to [-60,20]
+but element sizes are the same.
+
+![Results at time 0 and time 40](Start_and_End.png)
+
+
+![Error at time 40](error.png "Error")
+
+#### Caveats
+- Second order basis is highest available with quad elements
 
 ## Notes
 
@@ -14,6 +31,17 @@ Terrifying statement from the docs: "MOOSE does not use traditional versioning, 
 
 Code is C++17, Python only used for postprocessing, data manipulation, docs generation etc.
 Intel compilers NOT supported; gcc (>7.5) and clang (>10.0.1) only.
+
+### Parallelism
+
+- MPI + Threading supported
+- GPU via PETSc only.
+- Supports (in theory) CUDA, KOKKOS, HIP, OpenCL. SYCL ("Not yet supported")
+- Have looked at this for another project will share when written up but..
+    - Works on NVIDIA (CUDA or Kokkos), can't make PETSc work on Intel GPUs
+      (uses SYCL via KOKKOS), never tried with AMD 
+    - Seems to be that not enough work is offloaded to GPU to get speed-up with
+      A100 (vs sapphire rapids).
 
 
 ### Dependencies
