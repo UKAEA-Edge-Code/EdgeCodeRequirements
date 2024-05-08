@@ -1,0 +1,48 @@
+{
+    // "init" :
+    // {
+    //     "type" : "lamb",
+    //     "posX" : 0.5,
+    //     "posY" : 0.8,
+    //     "sigma" : 0.1,
+    //     "velocity" : 1
+    // },
+    "init" :
+    {
+        "type" : "gaussian",
+        "posX" : 0.1,
+        "posY" : 0.5,
+        "sigma" : 0.5
+    },
+    "physical":
+    {
+        "nu" : 1e-7
+    },
+    "elliptic":
+    {
+        "eps_pol" : 1e-6
+    },
+    "grid":
+    {
+        "n" : 3,
+        "Nx" : 64,
+        "Ny" : 16,
+        "x" : [0,40],
+        "y" : [0,10],
+        "bc" : ["PER", "DIR"]
+    },
+    "timestepper":
+    {
+        "tableau" : "Bogacki-Shampine-4-2-3",
+        "rtol" : 1e-5,
+        "atol" : 1e-6
+    },
+    "output":
+    {
+        "n" : 3,
+        "Nx" : 64,
+        "Ny" : 16,
+        "tend" : 40,
+        "maxout" : 40
+    }
+}
