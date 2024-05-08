@@ -16,6 +16,7 @@ Description from the [DUNE project page](https://www.dune-project.org/):
 ### Gripes
 - Suggested (apt-based) installation on Ubuntu didn't work, at least not easily - couldn't find the dune-pdelab package, which seemed to be essential
 - dune.fem tutorials require the latest development version, didn't work with `pip install dune.fem`
+- Have to use [DuneGridFormat(.dgf)](https://dune-project.org/doxygen/master/group__DuneGridFormatParser.html) for meshes, although they do have a [converter](https://dune-project.org/sphinx/content/sphinx/dune-fem/gmsh2dgf_nb.html)
 
 ### Installation (Ubuntu)
 
@@ -27,7 +28,11 @@ Description from the [DUNE project page](https://www.dune-project.org/):
 **pip**
 - core modules easy to install, no sudo needed
 - additional (dune-fem, dune-fem-dg etc.) modules easy to install
-- tutorials work out-of-the-box once you have the correct version
+- *Some* tutorials work out-of-the-box once you have the correct version
+
+### Examples
+
+
 
 Dependencies
 - SciPy
