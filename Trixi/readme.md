@@ -45,7 +45,7 @@ provides a system of ODEs that are solved using the [OrdinaryDiffEq](https://git
 ### Advection test
 
 The advection equations are already implemented as ``LinearScalarAdvectionEquation2D`` and provided as convergence tests. You can provide an advection velocity and construct a structured mesh with ``StructuredMesh``. Unfortunately ``RadauIIA3()`` (the integration scheme provided by [OrdinaryDiffEq](https://github.com/SciML/OrdinaryDiffEq.jl)) crashes the code, so `BS3()` is used instead. With purely horizontal advection and a Gaussian of width $2$, at $t=40$ the solution has $L_2$ error of $2.28576555e-04$ and $L_\infty$ error of $2.13218567e-03$.
-Changing the advection angle hardly affects the result. The test completes in under $0.5s$ on my desktop. A script is [here](./simple_advect_periodic_DG/simple_advect_periodic_DG.jl).
+Changing the advection angle hardly affects the result. The test completes in under $0.5s$ on my desktop. A script is [here](./Trixi/simple_advect_periodic_DG/simple_advect_periodic_DG.jl).
 
 
 
