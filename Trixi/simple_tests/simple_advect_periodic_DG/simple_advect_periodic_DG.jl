@@ -46,7 +46,7 @@ function initial_condition_monster(x, t, equation::LinearScalarAdvectionEquation
     x_trans = x_trans_periodic_2d(x - equation.advection_velocity * t)
     s = 2.0
     a = 0.1
-    scalar = exp( -( a^2 / (s^2 - x_trans[1]^2 + x_trans[2]^2) ) )
+    scalar = max(0,exp( -( a^2 / (s^2 - x_trans[1]^2 + x_trans[2]^2) ) ))
     return SVector(scalar)
 end
 initial_condition = initial_condition_gauss
@@ -70,6 +70,6 @@ callbacks = CallbackSet(analysis_callback,save_solution);
 # (nonstiff explicit Runge-Kutta, Bogacki-Shampine 3/2 method, "ode23()" in MATLAB)
 sol = solve(ode, BS3(), save_everystep = false, callback = callbacks);
 
-# With initial_condition_gauss, s=2, t=40 (polydeg=3):
+# With initial_condition_gauss, s=2, t=40 (polydeg=3), v = (1,0):
 #L2 error:    2.28576555e-04
 #Linf error:  2.13218567e-03
