@@ -1,6 +1,6 @@
 # Simple tests
 
-# 1. Simple advection (simple_advect_CG_fenicsx.py)
+# 1. Simple advection (simple_advect_CG_fenicsx.py, simple_advect_periodic_CG_fenicsx.py)
 
 Advection of scalar field at unit velocity on a periodic domain $40 \times 10$ length units.  Advect left for $40$ time units.\
 Discretization: $64 \times 16$ quadrilaterals, order-3 Lagrange polynomial basis functions, continuous Galerkin.\
