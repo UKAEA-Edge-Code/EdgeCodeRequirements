@@ -101,6 +101,15 @@ unclear how difficult it would be to add support for this.
 MFEM only seems to support up to 3 dimensions. It does not look like
 velocity space is supported.
 
+There are unit tests but no information on coverage that I can
+see. There do not appear to be integration tests. The examples could
+in principle act as regression tests but they don't appear to be run
+as part of CI.
+
+The PyMFEM bindings are fairly low-level and not entirely
+Pythonic. It's possible to end up with dangling pointers if the owner
+of an object gets garbage-collected, leading to segfaults.
+
 ## Installation
 
 MFEM can be installed straightforwardly with `spack`. Installing the
