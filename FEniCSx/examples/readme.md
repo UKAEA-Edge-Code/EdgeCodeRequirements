@@ -8,4 +8,4 @@ Boundary conditions: all-Neumann (I think).\
 Time-stepper: First-order backward Euler.\
 Initial data: either Gaussian $n=e^{-\frac{r^2}{s^2}}$ centered in the domain.\
 Analytic solution: obviously just the uniformly-advected initial data.\
-Other notes: TODOs include adding better time-stepper, periodic BCs, L2 error evaluation, DG version.
+Other notes: TODOs include adding better time-stepper, L2 error evaluation, DG version.
