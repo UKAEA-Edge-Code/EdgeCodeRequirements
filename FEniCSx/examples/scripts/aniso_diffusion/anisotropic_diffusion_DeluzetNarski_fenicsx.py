@@ -68,7 +68,7 @@ v = TestFunction(V)
 
 x = SpatialCoordinate(mesh0)
 
-## magnetic field lines direction unit vector
+# magnetic field lines direction unit vector
 norm_denom = ufl.sqrt((alpha*(2*x[1]-1)*(ufl.cos(m*pi*x[0]))+pi)**2+(pi*alpha*m*(x[1]**2-x[1])*(ufl.sin(m*pi*x[0])))**2)
 bhat = as_vector([(alpha*(2*x[1]-1)*ufl.cos(m*pi*x[0])+pi)/norm_denom, (pi*alpha*m*(x[1]**2-x[1])*ufl.sin(m*pi*x[0]))/norm_denom])
 
@@ -80,9 +80,9 @@ flux = k_par * bhat * dot(bhat, grad(u)) + k_per * (grad(u) - bhat * dot(bhat, g
 a = inner(flux, grad(v))*dx
 f = fem.Function(V)
 
-## got to work out f from MMS given the solution in "solution" above
-## algebra is a total PITA so let's use a high-order function space to do it numerically ...
-## can easily be tested for straight fieldlines case (MMS is easy algebra in that case)
+# got to work out f from MMS given the solution in "solution" above
+# algebra is a total PITA so let's use a high-order function space to do it numerically ...
+# can easily be tested for straight fieldlines case (MMS is easy algebra in that case)
 V_S = fem.functionspace(mesh0, ("Lagrange", 10))
 solution_S = fem.Function(V_S)
 solution_S.interpolate(lambda x: np.sin(pi*x[1]+alpha*(x[1]**2-x[1])*np.cos(m*pi*x[0]))+eps*np.cos(2*pi*x[0])*np.sin(pi*x[1]))
@@ -107,12 +107,9 @@ solver.setOperators(A)
 solver.setType(PETSc.KSP.Type.PREONLY)
 solver.getPC().setType(PETSc.PC.Type.LU)
 
-T = fem.Function(V)
-T.name = "density"
-
 nh = problem.solve()
 
-# output has to be first order so need ot interpolate (problem is output will look crap on a low res high order calc even though it's correct ...)
+# output has to be first order so need to interpolate (problem is output will look crap on a low res high order calc even though it's correct ...)
 # really need to interpolate onto a finer mesh in that case, but I got segfaults when I tried ...
 V1 = fem.functionspace(mesh0, ("Lagrange",1))
 n_out = fem.Function(V1)
