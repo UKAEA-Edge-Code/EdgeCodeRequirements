@@ -1,18 +1,12 @@
-# import numpy, math, sys
-from matplotlib import pyplot
 from dune.grid import structuredGrid as leafGridView
+from dune.fem.operator import molGalerkin as molOperator
 from dune.fem.space import dglegendre as dgSpace
-
-# from dune.fem.scheme import galerkin as solutionScheme
-# from dune.ufl import Constant
-
 from ufl import (
     FacetNormal,
     TestFunction,
     TrialFunction,
     SpatialCoordinate,
     triangle,
-    FacetNormal,
     dx,
     ds,
     grad,
@@ -26,7 +20,7 @@ from ufl import (
 
 # remove later, shows same error: from dune.fem.space import dgonb as dgSpace
 N = 200
-gridView = leafGridView([0], [1], [N], overlap=1)
+gridView = leafGridView([0], [1], [N], periodic=[1], overlap=1)
 space = dgSpace(gridView, order=1)
 
 u = TrialFunction(space)
@@ -49,33 +43,46 @@ advBnd = (hatb * u + (dot(b, n) - hatb) * g) * v * dD * ds
 form = advInternal + advSkeleton + advBnd
 
 
-from dune.fem.operator import molGalerkin as molOperator
-
 op = molOperator(form)
 
+# Set ICs - step function from 0 <= x <= 0.25
 uh = space.interpolate(conditional(x[0] < 0.25, 1, 0), name="solution")
-uh.plot()
+
+# # Plot ICs
+# uh.plot()
+
 w = uh.copy()
 un = uh.copy()
+# Set timestep using target cfl val
 cfl = 0.1
-tau = cfl / (speed * N)
+dt = cfl / (speed * N)
+t_final = 3.0
+
+nsteps = int(t_final / dt)
+nchks = int(5 * t_final)
+chk_freq = nsteps / nchks
 
 t = 0
-while t < 1:
+step = 0
+while t < t_final:
     un.assign(uh)
 
     op(uh, w)
     uh.axpy(
-        -tau, w
+        -dt, w
     )  # with numpy backend equivalent to 'uh.as_numpy[:] -= tau*w.as_numpy[:]'
     op(uh, w)
     uh.axpy(
-        -tau, w
+        -dt, w
     )  # with numpy backend equivalent to 'uh.as_numpy[:] -= tau*w.as_numpy[:]'
 
     # with numpy backend the following is equivalent to
     # 'uh.as_numpy[:] = 0.5*(uh.as_numpy[:] + un.as_numpy[:])'
     uh *= 0.5
     uh.axpy(0.5, un)
-    t += tau
-uh.plot()
+    if step % chk_freq == 0:
+        print(f"t = {t}")
+        uh.plot()
+
+    t += dt
+    step += 1

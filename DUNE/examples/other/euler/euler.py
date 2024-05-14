@@ -1,8 +1,3 @@
-# %% [markdown]
-# .. index:: Equations; Euler equations
-#
-# # Euler System of Gas Dynamics
-# %%
 try:
     import dune.femdg
 except ImportError:
@@ -14,6 +9,7 @@ except ImportError:
 import numpy
 from matplotlib import pyplot
 from ufl import *
+from dune.alugrid import aluSimplexGrid as simplexGrid
 from dune.grid import structuredGrid, reader
 import dune.fem
 from dune.fem.space import dgonb, finiteVolume
@@ -21,31 +17,11 @@ from dune.fem.function import gridFunction
 from dune.femdg import femDGOperator
 from dune.femdg.rk import femdgStepper
 from dune.fem.utility import lineSample
+import os.path
 
-dune.fem.threading.use = 4
-
-
-# %% [markdown]
-# .. index:: Methods; Stabilized Discontinuous Galerkin
-#
-# The dune-fem-dg module can either used stabilizer DG methods to solve
-# this type of problem or higher order FV methods based on linear
-# reconstruction. The following function uses a finite-volume space when
-# order=0 and a dg space with orthonormal polynomials otherwise.
-# Note that when a limiter is then used in the scheme, the finite-volume
-# scheme will use linear reconstruction:
-# %%
-def getSpace(gv, order):
-    return (
-        finiteVolume(gridView, dimRange=4)
-        if order == 0
-        else dgonb(gridView, dimRange=4, order=order)
-    )
+dune.fem.threading.use = 4  #
 
 
-# %% [markdown]
-# Basic model for hyperbolic conservation law
-# %%
 class Model:
     gamma = 1.4
 
@@ -77,11 +53,6 @@ class Model:
         return abs(dot(v, n)) + sqrt(Model.gamma * p / rho)
 
 
-# %% [markdown]
-# .. index:: Methods; Limiter
-#
-# Add methods for limiting
-# %%
 def velocity(t, x, U):
     _, v, _ = Model.toPrim(U)
     return v
@@ -103,9 +74,6 @@ Model.physical = physical
 Model.jump = jump
 
 
-# %% [markdown]
-# Method to evolve the solution in time
-# %%
 def evolve(space, u_h, limiter="MinMod"):
     lu_h = u_h.localFunction()
 
@@ -124,22 +92,12 @@ def evolve(space, u_h, limiter="MinMod"):
 
     t = 0
     saveStep = 0.1
-    fig = pyplot.figure(figsize=(30, 10))
-    rho.plot(gridLines="white", figure=(fig, 131), colorbar=False, clim=[0.125, 1])
-    c = 1
     while t <= 0.3:
         operator.setTime(t)
         t += stepper(u_h)
         if t > saveStep:
             print(t)
             saveStep += 0.1
-            rho.plot(
-                gridLines="white",
-                figure=(fig, 131 + c),
-                colorbar=False,
-                clim=[0.125, 1],
-            )
-            c += 1
 
     res = numpy.zeros((2, space.gridView.size(0)))
     for i, e in enumerate(space.gridView.elements):
@@ -149,65 +107,30 @@ def evolve(space, u_h, limiter="MinMod"):
     return res
 
 
-# %% [markdown]
-# A radial Riemann problem
-# %%
+# Compute ICs
 x = SpatialCoordinate(triangle)
 initial = conditional(
     dot(x, x) < 0.1, as_vector([1, 0, 0, 2.5]), as_vector([0.125, 0, 0, 0.25])
 )
 
-domain = (reader.dgf, "triangle.dgf")
-
-# %% [markdown]
-# We start with a triangular grid
-# %%
-from dune.alugrid import aluSimplexGrid as simplexGrid
-
-gridView = simplexGrid(domain, dimgrid=2, verbose=True)
-gridView.plot()
-
 # fix the order to use and storage structure for results
 res = {}
 order = 1
-space = getSpace(gridView, order)
 
-# %% [markdown]
-# Initial conditions for a radial Riemann problem
-#
-# First solved on a triangle grid and minmod limiter
+domain = (
+    reader.dgf,
+    os.path.join(os.path.abspath(os.path.dirname(__file__)), "triangle.dgf"),
+)
+gridView = simplexGrid(domain, dimgrid=2, verbose=True)
 
-# %%
+space = dgonb(gridView, dimRange=4, order=order)
+
+# Set ICs
 u_h = space.interpolate(initial, name="solution")
 res["simplex (minmod)"] = evolve(space, u_h)
 
-# %% [markdown]
-# Now a triangle grid without limiter (which of course fails)
-# %%
-try:
-    u_h = space.interpolate(initial, name="solution")
-    evolve(space, u_h, limiter=None)
-except ValueError:
-    print("SOLUTION NOT VALID")
 
-
-# %% [markdown]
-# Now a finite volume method first without reconstruction on the triangle grid
-# %%
-fvspace = getSpace(gridView, 0)
-u_h = fvspace.interpolate(initial, name="solution")
-res["simplex (fv)"] = evolve(fvspace, u_h, limiter=None)
-
-# %% [markdown]
-# and a finite volume method with reconstruction
-# %%
-fvspace = getSpace(gridView, 0)
-u_h = fvspace.interpolate(initial, name="solution")
-res["simplex (higher order fv)"] = evolve(fvspace, u_h, limiter="MinMod")
-
-# %% [markdown]
 # Using a polygonal grid (dual grid of previous grid)
-# %%
 try:
     from dune.polygongrid import polygonGrid
 
@@ -216,7 +139,7 @@ except ImportError:
     print("dune.polygongrid module not found using the simplex grid again")
     gridView = simplexGrid(domain, dimgrid=2)
 gridView.plot()
-space = getSpace(gridView, order)
+space = dgonb(gridView, dimRange=4, order=order)
 
 # %% [markdown]
 # Solution with limiter - fails as above without

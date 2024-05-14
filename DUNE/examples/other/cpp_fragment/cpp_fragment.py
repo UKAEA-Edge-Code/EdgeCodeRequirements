@@ -3,9 +3,6 @@ from dune.fem.plotting import plotComponents
 from dune.grid import structuredGrid as leafGridView
 from matplotlib import pyplot as plt
 
-# Set pyplot color map
-plt.set_cmap("jet")
-
 mins = [0, 0]
 maxes = [1, 1]
 ranges = [4, 4]

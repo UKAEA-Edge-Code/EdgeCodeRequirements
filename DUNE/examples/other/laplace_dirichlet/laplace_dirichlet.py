@@ -10,12 +10,6 @@ from dune.ufl import DirichletBC
 
 from scipy.sparse.linalg import spsolve as solver
 
-# Set pyplot color map
-from matplotlib import pyplot as plt
-
-plt.set_cmap("jet")
-
-
 space = lagrange(gridView, order=1)
 u_h = space.interpolate(0, name="u_h")
 
