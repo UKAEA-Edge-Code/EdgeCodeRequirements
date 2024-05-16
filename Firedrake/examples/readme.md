@@ -50,7 +50,7 @@ Equations are $\dot{n} + (nu)' = 1$ and $\dot{(nu)}+(nu^2)' = -n'$.
 Discretization: $200$ equal-size 1D elements, order $N$ CG for velocity and order $(N-1)$ DG for density.\
 Boundary conditions: sonic outflow at both ends (velocity is $\pm 1$).\
 Time-stepper: Gauss-Legendre order-2.\
-Initial data: Gaussian centered in the domain.\
+Initial data: density Gaussian centered in the domain, velocity linear and sonic outflow at boundaries.\
 Analytic solution: not known for time-evolution, final state is $n=1+\sqrt{1-x^2}$, $u=\frac{1-\sqrt{1-x^2}}{x}$.\
 Other notes: needs Irksome (Runge-Kutta steppers for Firedrake).  There are other ways to do this problem e.g. using only CG elements with streamline-upwind suppression of numerical oscillations.
 
