@@ -39,7 +39,9 @@ Other notes: script outputs L2 error so can compare with the figures in the pape
 
 # 3. Nonconforming mesh (no script yet)
 
-I cannot get Firedrake to load this mesh correctly ... watch this space.
+The Firedrake GitHub discussions (i.e. the help) have informed me that meshes such as the nonconforming example illustrated here are not currently supported.
+
+![nonconforming_mesh](png/nonconforming_mesh.jpg "Example nonconforming mesh from NESO-FAME; elements have multiple neighbours on some faces.")
 
 # 4. 1D outflow isothermal compressible Euler
 
