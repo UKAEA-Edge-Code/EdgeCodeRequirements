@@ -36,3 +36,22 @@ Analytic solution: $n=\sin(\pi y + \alpha (y^2-y) \cos m \pi x) + \epsilon \cos 
 Other notes: script outputs L2 error so can compare with the figures in the paper.
 
 ![aniso_diffusion_DeluzetNarski](png/numerical_solution_aniso_diffusion_DeluzetNarski.png "Output of script for the demanding case of h=0.00078125, alpha=2, m=10, eps=0.001.")
+
+# 3. Nonconforming mesh (no script yet)
+
+I cannot get Firedrake to load this mesh correctly ... watch this space.
+
+# 4. 1D outflow isothermal compressible Euler
+
+Evolve compressible Euler (plus spatially-uniform density source) on a 1D domain of $2$ length units.  Evolve initial Gaussian profile for $4$ time units.  Produces file containing time evolution of density and velocity.
+
+Equations are $\dot{n} + (nu)' = 1$ and $\dot{(nu)}+(nu^2)' = -n'$.
+
+Discretization: $200$ equal-size 1D elements, order $N$ CG for velocity and order $(N-1)$ DG for density.\
+Boundary conditions: sonic outflow at both ends (velocity is $\pm 1$).\
+Time-stepper: Gauss-Legendre order-2.\
+Initial data: density Gaussian centered in the domain, velocity linear and sonic outflow at boundaries.\
+Analytic solution: not known for time-evolution, final state is $n=1+\sqrt{1-x^2}$, $u=\frac{1-\sqrt{1-x^2}}{x}$.\
+Other notes: needs Irksome (Runge-Kutta steppers for Firedrake).  There are other ways to do this problem e.g. using only CG elements with streamline-upwind suppression of numerical oscillations.
+
+![1D_compressible_Euler_DG](png/SOL_1D_DG_upwind_irksome.png "Frames from time-evolution of the initial state to the steady-state.")
