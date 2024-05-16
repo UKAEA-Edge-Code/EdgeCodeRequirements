@@ -7,7 +7,28 @@ Description from the [DUNE project page](https://www.dune-project.org/):
 
 > "DUNE, the Distributed and Unified Numerics Environment is a modular toolbox for solving partial differential equations (PDEs) with grid-based methods. It supports the easy implementation of methods like Finite Elements (FE), Finite Volumes (FV), and also Finite Differences (FD)."
 
-  
+## Examples
+
+### CG advection ([simple_advect_periodic_CG.py](examples/simple_advection/simple_advect_periodic_CG.py))
+
+<img src="examples/simple_advection/postproc/DUNE_advection_CG.gif" width="600">
+
+More-or-less working (at least with Gaussian ICs), but:
+- Result is out by half a unit
+- Needs a much smaller timestep than used in implementations based on other frameworks
+- Bizarre bug with the periodic boundary if run **without** MPI - appears to be a gap or ghost region between low-x and high-x boundaries. Can't find a solution in the docs (Or much about PBCs at all...).
+### DG advection ([simple_advect_periodic_DG.py](examples/simple_advection/simple_advect_periodic_DG.py))
+
+WIP
+
+### Anisotropic Diffusion ([aniso_diffusion_DeluzetNarski.py](examples/aniso_diffusion/aniso_diffusion_DeluzetNarski.py))
+
+WIP
+
+### 1D outflow isothermal compressible Euler ([SOL1D_DG.py](examples/1doutflow/SOL1D_DG.py))
+
+WIP
+
 ## Notes
 
 - Using dune-fem module 
@@ -30,11 +51,7 @@ Description from the [DUNE project page](https://www.dune-project.org/):
 - additional (dune-fem, dune-fem-dg etc.) modules easy to install
 - *Some* tutorials work out-of-the-box once you have the correct version
 
-### Examples
-
-
-
-Dependencies
+### Dependencies
 - SciPy
 - Eigen (optional)
 - PAPI (optional)
