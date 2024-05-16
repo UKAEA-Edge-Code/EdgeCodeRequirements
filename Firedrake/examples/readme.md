@@ -49,4 +49,6 @@ Boundary conditions: sonic outflow at both ends (velocity is $\pm 1$).\
 Time-stepper: Gauss-Legendre order-2.\
 Initial data: Gaussian centered in the domain.\
 Analytic solution: not known for time-evolution, final state is $n=1+\sqrt{1-x^2}$, $u=\frac{1-\sqrt{1-x^2}}{x}$.\
-Other notes: needs Irksome (Runge-Kutta steppers for Firedrake).
+Other notes: needs Irksome (Runge-Kutta steppers for Firedrake).  There are other ways to do this problem e.g. using only CG elements with streamline-upwind suppression of numerical oscillations.
+
+![1D_compressible_Euler_DG](png/SOL_1D_DG_upwind_irksome.png "Frames from time-evolution of the initial state to the steady-state.")
