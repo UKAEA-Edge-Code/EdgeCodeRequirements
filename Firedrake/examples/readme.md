@@ -43,8 +43,8 @@ I cannot get Firedrake to load this mesh correctly ... watch this space.
 
 # 4. 1D outflow isothermal compressible Euler
 
-Evolve compressible Euler on a 1D domain of $2$ length units.  Evolve initial Gaussian profile for $4$ time units.  Produces file containing time evolution of density and velocity.\
-Discretization: $200$ equal-size 1D elements, order N CG for velocity and order N-1 DG for density.\
+Evolve compressible Euler (plus spatially-uniform density source) on a 1D domain of $2$ length units.  Evolve initial Gaussian profile for $4$ time units.  Produces file containing time evolution of density and velocity.\
+Discretization: $200$ equal-size 1D elements, order-$N$ CG for velocity and order-$(N-1)$ DG for density.\
 Boundary conditions: sonic outflow at both ends (velocity is $\pm 1$).\
 Time-stepper: Gauss-Legendre order-2.\
 Initial data: Gaussian centered in the domain.\
