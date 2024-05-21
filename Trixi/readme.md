@@ -59,11 +59,56 @@ I was able to use the equation abstraction to have 3 scalar variables, so as to 
 **TODO**
 - Need to check BCs and run.
 
+### Meshes
+
+Trixi can construct structured/unstructured meshes internally. For externally generated meshes there are several options, but for h-nonconforming quad and hex elements with curvilinear coordinates, `P4estMesh` is the only documented interface. This utilises the `p4est` library for parallel AMR, which has also been used in other frameworks such as
+deal.II. It supports hanging nodes, but it is not clear if general connectivity can be automatically detected, so specific connnectivity information might be needed for that.
+Another interface for [`t8code`](https://dlr-amr.github.io/t8code/) which claims to support everything (e.g. adaptive, hybrid) is WIP, but a lot is working already.
+
+#### P4estMesh input from Gmsh `.geo` file
+- Don't think one can use command line `gmsh`, since no option to save boundary nodes. Might be able to use Python API, but opening `.geo` file in gmsh, meshing, then exporting as `.inp` file will work. Need to checkbox Abaqus save options. This provides the boundary labels.
+- All boundaries must be `Physical Line`, not ~~`Physcal Curve`~~, because the curved boundary information cannot be converted (can use HOHQMesh to do that though if required).
+- `Mesh.RecombineAll = 1;` should be set, otherwise quads are not used. I think `Recombine Surface` or another option may be needed in order to make squares explicitly.
+- Example square of squares (save as `square.inp`):
+```gmsh
+// Gmsh unit square [0,1]x[0,1]
+Mesh.MshFileVersion = 2.2;
+h = 0.1;  //refinement factor h
+Point(1) = {0.0,0.0, 0.0, h};
+Point(2) = {0.0, 1.0, 0.0, h};
+Point(3) = {1.0, 1.0, 0.0, h};
+Point(4) = {1.0, 0.0, 0.0, h};
+Line(1) = {1,2};
+Line(2) = {2,3};
+Line(3) = {3,4};
+Line(4) = {4,1};
+Line Loop(8) = {1,2,3,4};
+// Settings
+// This value gives the global element size factor (lower -> finer mesh)
+//Mesh.CharacteristicLengthFactor = 1.0 * 2^(-3);
+Mesh.RecombineAll = 1;
+Plane Surface(1) = {8};
+Transfinite Surface {1};
+Recombine Surface {1};
+Physical Line(1) = {1};
+Physical Line(2) = {2};
+Physical Line(3) = {3};
+Physical Line(4) = {4};
+Physical Surface(1) ={6};
+```
+- To read in Trixi:
+```julia
+# polydeg should be same as solver 
+boundary_symbols = [:PhysicalLine1, :PhysicalLine2, :PhysicalLine3, :PhysicalLine4]
+mesh_file="square.inp"
+mesh = P4estMesh{2}(mesh_file, polydeg = polydeg, boundary_symbols = boundary_symbols)
+```
+   
 ## Issues, bugs etc.
 - Not presently coupled to elliptic solver. Can solve as parabolic problem or [hyperbolic diffusion](https://github.com/trixi-framework/paper-self-gravitating-gas-dynamics).
 - Some numerical integrators (esp. implicit ones, such as `RadauII3()`) not working.
 - Split hyperbolic/parabolic system requires source terms to be supplied for the hyperbolic one.
-- No convenient way of taking numerical derivatives at a high level (e.g. for DN source term)? (but automatic derivatives should be possible?)
+- For most meshes, no convenient way of taking numerical derivatives at a high level (e.g. for DN source term)? The exception may be `DGMultiMesh`. Otherwise, automatic derivatives should be possible?
 - Extra variables required for magnetic field (but perhaps this is even desirable?).
 - Meshes support hanging nodes (perhaps p4est is the the most flexible), but possibly connectivity information is required for locally field-aligned elements?
   
