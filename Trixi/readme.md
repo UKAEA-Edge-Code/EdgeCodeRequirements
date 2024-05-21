@@ -69,7 +69,7 @@ Another interface for [`t8code`](https://dlr-amr.github.io/t8code/) which claims
 - Don't think one can use command line `gmsh`, since no option to save boundary nodes. Might be able to use Python API, but opening `.geo` file in gmsh, meshing, then exporting as `.inp` file will work. Need to checkbox Abaqus save options. This provides the boundary labels.
 - All boundaries must be `Physical Line`, not ~~`Physcal Curve`~~, because the curved boundary information cannot be converted (can use HOHQMesh to do that though if required).
 - `Mesh.RecombineAll = 1;` should be set, otherwise quads are not used. I think `Recombine Surface` or another option may be needed in order to make squares explicitly.
-- Example square of squares (save as `square.inp`):
+- Example square of squares (`squares.geo`, open in gmsh, mesh, then save as `square.inp`):
 ```gmsh
 // Gmsh unit square [0,1]x[0,1]
 Mesh.MshFileVersion = 2.2;
