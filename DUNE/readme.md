@@ -32,6 +32,12 @@ WIP
 
 WIP
 
+### Non-conforming mesh ([non-conforming.py](examples/non-conformal_mesh/non-conforming.py))
+
+Attempt to read a non-conforming mesh and run a simple problem. WIP.
+
+The dune-grid interface allegedly supports non-conforming meshes (e.g. section 2. of [this pdf](https://wrap.warwick.ac.uk/146797/2/WRAP-The-DUNE-framework-basic-concepts-recent-development-Dedner-2020.pdf) ).
+
 ## Notes
 
 - Using dune-fem module 
