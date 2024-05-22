@@ -61,16 +61,31 @@ I was able to use the equation abstraction to have 3 scalar variables, so as to 
 - Used symbolically derived source term retained as a variable that is not updated.
 - Field components also kept as dummy variables.
 - Used dummy hyperbolic equations, a prototype for adding nonlinear terms.
-- **TODO** check convergence errors (but might wait until h-refinement is feasible, i.e. hyperbolic)
+- **TODO** check convergence of errors for lowest order poly. (but might wait until h-refinement is feasible, i.e. hyperbolic)
 
 Code: 
 
 [run_aniso_4var.jl](./simple_tests/aniso_diffusion_DeluzetNarski/run_aniso_4var.jl)
 
-Output:
+Output (32x32 mesh, polydeg=3):
 
 ![anisotropic diffusion](simple_tests/aniso_diffusion_DeluzetNarski/fig/DN_parabolic_hyperbolic_a2m10eps1e-6_10x10-3.png "Diffusion")
+```
+────────────────────────────────────────────────────────────────────────────────────────────────────
+ Simulation running 'DummyEquations2D' with DGSEM(polydeg=3)
+────────────────────────────────────────────────────────────────────────────────────────────────────
+ #timesteps:              32814                run time:       1.37539314e+03 s
+ Δt:             5.17163308e-05                └── GC time:    1.22266740e+01 s (0.889%)
+ sim. time:      2.00000000e+00 (100.000%)     time/DOF/rhs!:  2.19878114e-07 s
+                                               PID:            2.36730459e-07 s
+ #DOFs per field:         16384                alloc'd memory:        379.708 MiB
+ #elements:                1024
 
+ Variable:       rho              bx               by               sourcefun     
+ L2 error:       2.93637190e-04   2.49191928e-04   2.47561921e-03   1.00392167e-04
+ Linf error:     2.39927502e-03   9.53772137e-04   7.49090885e-03   8.72255532e-04
+────────────────────────────────────────────────────────────────────────────────────────────────────
+```
 
 ### Meshes
 
