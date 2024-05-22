@@ -63,6 +63,7 @@ I was able to use the equation abstraction to have 3 scalar variables, so as to 
 - Field components also kept as dummy variables.
 - Used dummy hyperbolic equations, a prototype for adding nonlinear terms.
 - **TODO** check convergence of errors for lowest order poly. (but might wait until h-refinement is feasible, i.e. hyperbolic)
+- **TODO** Check working with MPI!
 
 Code: 
 
