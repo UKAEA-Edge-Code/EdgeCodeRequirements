@@ -56,8 +56,21 @@ I was able to use the equation abstraction to have 3 scalar variables, so as to 
 
 ### Diffusion test
 
-**TODO**
-- Need to check BCs and run.
+**WIP**
+- Solved as a parabolic problem which is prohibitive for convergence testing (may try hyperbolic).
+- Used symbolically derived source term retained as a variable that is not updated.
+- Field components also kept as dummy variables.
+- Used dummy hyperbolic equations, a prototype for adding nonlinear terms.
+- **TODO** check convergence errors (but might wait until h-refinement is feasible, i.e. hyperbolic)
+
+Code: 
+
+[run_aniso_4var.jl](./simple_tests/aniso_diffusion_DeluzetNarski/run_aniso_4var.jl)
+
+Output:
+
+![anisotropic diffusion](simple_tests/aniso_diffusion_DeluzetNarski/fig/DN_parabolic_hyperbolic_a2m10eps1e-6_10x10-3.png "Diffusion")
+
 
 ### Meshes
 
