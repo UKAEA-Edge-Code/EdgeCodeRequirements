@@ -36,24 +36,79 @@ julia> Pkg.add(["Trixi", "Trixi2Vtk", "OrdinaryDiffEq", "Plots"])
 ## Experience with simple test problems
 
 Trixi is primarily designed to solve equations of the form
-$$
-\frac{\partial {\bf U}}{\partial t} + \nabla \cdot {\bf F_{\rm adv}} = {\bf S}
-$$
+$$\frac{\partial {\bf U}}{\partial t} + \nabla \cdot {\bf F_{\rm adv}} = {\bf S}$$
 where ${\bf F_{\rm adv}}$ are the advective fluxes and ${\bf S}$ contains sources. The framework is designed to be used at a high level, so for a new set of equations one does not need to do much more than defining the fluxes and sources if adapting one of the many examples. Parabolic terms can be included with a hybrid semidiscretization that treats hyperbolic and parabolic differently. A semidiscretization
 provides a system of ODEs that are solved using the [OrdinaryDiffEq](https://github.com/SciML/OrdinaryDiffEq.jl) package that is an interface to a large collection of integration schemes. At present, elliptic equations are solved as time-dependent problems (perhaps a new type of semidiscretization could be added to couple with various solvers).
 
 ### Advection test
 
 The advection equations are already implemented as ``LinearScalarAdvectionEquation2D`` and provided as convergence tests. You can provide an advection velocity and construct a structured mesh with ``StructuredMesh``. Unfortunately ``RadauIIA3()`` (the integration scheme provided by [OrdinaryDiffEq](https://github.com/SciML/OrdinaryDiffEq.jl)) crashes the code, so `BS3()` is used instead. With purely horizontal advection and a Gaussian of width $2$, at $t=40$ the solution has $L_2$ error of $2.28576555e-04$ and $L_\infty$ error of $2.13218567e-03$.
-Changing the advection angle hardly affects the result. The test completes in under $0.5s$ on my desktop. A script is [here](./simple_advect_periodic_DG/simple_advect_periodic_DG.jl).
-
-
+Changing the advection angle hardly affects the result. The test completes in under $0.5s$ on my desktop. A script is [here](./simple_tests/simple_advect_periodic_DG/simple_advect_periodic_DG.jl). The result can be readily plotted as follows:
+```julia
+julia> using Plots;
+julia> pd = PlotData2D(sol)
+julia> plot(pd, seriescolor=:heat)
+julia> plot!(getmesh(pd))
+```
+![simple_advection](simple_tests/simple_advect_periodic_DG/simple_advect_periodic_DG.png "Advection")
 
 I was able to use the equation abstraction to have 3 scalar variables, so as to include a 2D-vector field. I could then advect along a spatially-varying static field. This is helpful for the diffusion test.
 
 ### Diffusion test
 
 **TODO**
-- Can't use the gmsh mesh as curved edges and forcing them straight is messy (but might be able to use a similar mesh).
-- Need to work out BCs.
+- Need to check BCs and run.
+
+### Meshes
+
+Trixi can construct structured/unstructured meshes internally. For externally generated meshes there are several options, but for h-nonconforming quad and hex elements with curvilinear coordinates, `P4estMesh` is the only documented interface. This utilises the `p4est` library for parallel AMR, which has also been used in other frameworks such as
+deal.II. It supports hanging nodes, but it is not clear if general connectivity can be automatically detected, so specific connnectivity information might be needed for that.
+Another interface for [`t8code`](https://dlr-amr.github.io/t8code/) which claims to support everything (e.g. adaptive, hybrid) is WIP, but a lot is working already.
+
+#### P4estMesh input from Gmsh `.geo` file
+- Don't think one can use command line `gmsh`, since no option to save boundary nodes. Might be able to use Python API, but opening `.geo` file in gmsh, meshing, then exporting as `.inp` file will work. Need to checkbox Abaqus save options. This provides the boundary labels.
+- All boundaries must be `Physical Line`, not ~~`Physcal Curve`~~, because the curved boundary information cannot be converted (can use HOHQMesh to do that though if required).
+- `Mesh.RecombineAll = 1;` should be set, otherwise quads are not used. I think `Recombine Surface` or another option may be needed in order to make squares explicitly.
+- Example square of squares (`squares.geo`, open in gmsh, mesh, then save as `square.inp`):
+```gmsh
+// Gmsh unit square [0,1]x[0,1]
+Mesh.MshFileVersion = 2.2;
+h = 0.1;  //refinement factor h
+Point(1) = {0.0,0.0, 0.0, h};
+Point(2) = {0.0, 1.0, 0.0, h};
+Point(3) = {1.0, 1.0, 0.0, h};
+Point(4) = {1.0, 0.0, 0.0, h};
+Line(1) = {1,2};
+Line(2) = {2,3};
+Line(3) = {3,4};
+Line(4) = {4,1};
+Line Loop(8) = {1,2,3,4};
+// Settings
+// This value gives the global element size factor (lower -> finer mesh)
+//Mesh.CharacteristicLengthFactor = 1.0 * 2^(-3);
+Mesh.RecombineAll = 1;
+Plane Surface(1) = {8};
+Transfinite Surface {1};
+Recombine Surface {1};
+Physical Line(1) = {1};
+Physical Line(2) = {2};
+Physical Line(3) = {3};
+Physical Line(4) = {4};
+Physical Surface(1) ={6};
+```
+- To read in Trixi:
+```julia
+# polydeg should be same as solver 
+boundary_symbols = [:PhysicalLine1, :PhysicalLine2, :PhysicalLine3, :PhysicalLine4]
+mesh_file="square.inp"
+mesh = P4estMesh{2}(mesh_file, polydeg = polydeg, boundary_symbols = boundary_symbols)
+```
+   
+## Issues, bugs etc.
+- Not presently coupled to elliptic solver. Can solve as parabolic problem or [hyperbolic diffusion](https://github.com/trixi-framework/paper-self-gravitating-gas-dynamics).
+- Some numerical integrators (esp. implicit ones, such as `RadauII3()`) not working.
+- Split hyperbolic/parabolic system requires source terms to be supplied for the hyperbolic one.
+- For most meshes, no convenient way of taking numerical derivatives at a high level (e.g. for DN source term)? The exception may be `DGMultiMesh`. Otherwise, automatic derivatives should be possible?
+- Extra variables required for magnetic field (but perhaps this is even desirable?).
+- Meshes support hanging nodes (perhaps p4est is the the most flexible), but possibly connectivity information is required for locally field-aligned elements?
   
