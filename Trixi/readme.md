@@ -58,6 +58,7 @@ I was able to use the equation abstraction to have 3 scalar variables, so as to 
 
 **WIP**
 - Solved as a parabolic problem which is prohibitive for convergence testing (may try hyperbolic).
+- Cheated a bit by putting solution in as IC, but easier to check error via existing callback that way. (But also confirmed that converges the same for IC $\rho=\sin(\pi x)\sin(\pi y)$.) 
 - Used symbolically derived source term retained as a variable that is not updated.
 - Field components also kept as dummy variables.
 - Used dummy hyperbolic equations, a prototype for adding nonlinear terms.
