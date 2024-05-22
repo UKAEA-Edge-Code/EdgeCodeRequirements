@@ -62,8 +62,8 @@ I was able to use the equation abstraction to have 3 scalar variables, so as to 
 ### Meshes
 
 Trixi can construct structured/unstructured meshes internally. For externally generated meshes there are several options, but for h-nonconforming quad and hex elements with curvilinear coordinates, `P4estMesh` is the only documented interface. This utilises the `p4est` library for parallel AMR, which has also been used in other frameworks such as
-deal.II. It supports hanging nodes, but it is not clear if general connectivity can be automatically detected, so specific connnectivity information might be needed for that.
-Another interface for [`t8code`](https://dlr-amr.github.io/t8code/) which claims to support everything (e.g. adaptive, hybrid) is WIP, but a lot is working already.
+deal.II. It supports hanging nodes, but only beyond the initial refinement which is meant to be conforming.
+Another interface for [`t8code`](https://dlr-amr.github.io/t8code/) which claims to support whatever you want (e.g. adaptive, hybrid) is WIP, but a lot is working already.
 
 #### P4estMesh input from Gmsh `.geo` file
 - Don't think one can use command line `gmsh`, since no option to save boundary nodes. Might be able to use Python API, but opening `.geo` file in gmsh, meshing, then exporting as `.inp` file will work. Need to checkbox Abaqus save options. This provides the boundary labels.
