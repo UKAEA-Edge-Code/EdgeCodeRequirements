@@ -1,0 +1,5 @@
+*.dgf
+*.vtk
+*.msh
+!domain_4.msh
+!modified_domain_4.msh

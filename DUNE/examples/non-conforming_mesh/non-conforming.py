@@ -77,7 +77,7 @@ def write_to_vtk(mesh, basename, dir=this_dir):
 
 
 convert(
-    "modified_domain_4.msh",
+    "domain_4_byhand.msh",
     grid_from_mesh_data=False,
     write_dgf_and_read_back=True,
     write_msh=True,
