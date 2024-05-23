@@ -10,6 +10,14 @@ Description from the [deal.II project page](https://fenicsproject.org/):
 
 ### Installation
 
+Many options exist. The spack install takes a long time (installs llvm) but works relatively smoothly.
+Installed via the `spack.yaml` in this dir with:
+```
+spack env activate . -p
+spack install -j 8
+```
+The advertised "--test=root" option failed for me.
+
 ## Links
 
 - [Docs index](https://www.dealii.org/current/index.html)
