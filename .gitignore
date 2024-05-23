@@ -5,3 +5,6 @@ advection.mesh
 *.pvd
 *.pvtu
 *.vtu
+
+# IDEs
+.vscode
