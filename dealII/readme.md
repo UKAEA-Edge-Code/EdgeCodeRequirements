@@ -8,15 +8,46 @@ Description from the [deal.II project page](https://fenicsproject.org/):
 
 ## Notes
 
+### Development Activity / Community
+- Lots of PRs into the main code base.
+- Many contributors.
+- Active mailing list and Google group.
+- Approx 2 or 3 releases per year.
+- Regular user/developer workshops.
+
+### Documentation
+- There is an extensive list of tutorials, covering a wide range of topics.
+- The style is quite verbose (lecture-notes-like); a lot of effort is made to explain how different objects interact and what the code is doing behind the scenes.
+- Personally, as a developer encountering the codebase for the first time, I found this approach very useful and informative.
+- Level of detail could indicate less-than-intuitive API?? Lots of code for Poisson e.g...
+- Release notes include a list of "incompatibly" changes that will require changes to application code. 
+
+### Features
+- Some Python bindings exist - haven't checked how much of the c++ functionality they cover.
+- Sundials (e.g. CVODE) integration
+- Some CUDA support
+- Some Kokkos support
+- Reads gmsh
+
+<!-- 
+### General observations
+- Enormous codebase -->
+
+
 ### Installation
 
-Many options exist. The spack install takes a long time (installs llvm) but works relatively smoothly.
+Many options exist. The spack install takes a long time (installs llvm) and had a minor gotcha, but worked after some tinkering.
 Installed via the `spack.yaml` in this dir with:
 ```
 spack env activate . -p
 spack install -j 8
 ```
 The advertised "--test=root" option failed for me.
+
+### Gripes
+Open pull, closed push, so need an accounr on their gitlab server.
+Quite a lot of boilerplate in application code.
+Fairly low level API? Based on the first few egs, anyway.
 
 ## Links
 
