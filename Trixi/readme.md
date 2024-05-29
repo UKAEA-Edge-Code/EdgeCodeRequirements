@@ -56,14 +56,13 @@ I was able to use the equation abstraction to have 3 scalar variables, so as to 
 
 ### Diffusion test
 
-**WIP**
-- Solved as a parabolic problem which is prohibitive for convergence testing (may try hyperbolic).
-- Cheated a bit by putting solution in as IC, but easier to check error via existing callback that way. (But also confirmed that converges the same for IC $\rho=\sin(\pi x)\sin(\pi y)$.) 
+- Initially solved as a *parabolic* problem which is prohibitive for convergence testing, but *hyperbolic diffusion* is more promising (see below).
+- Cheated a bit by putting solution in as IC, but easier to check error via existing callback that way. (But also confirmed that converges the same for IC $\rho=\sin(\pi x)\sin(\pi y)$.)
 - Used symbolically derived source term retained as a variable that is not updated.
-- Field components also kept as dummy variables.
-- Used dummy hyperbolic equations, a prototype for adding nonlinear terms.
-- **TODO** check convergence of errors for lowest order poly. (but might wait until h-refinement is feasible, i.e. hyperbolic)
-- **TODO** Check working with MPI!
+- Magnetic field components also kept as dummy variables.
+- With parabolic solve, used dummy hyperbolic equations as well (so to see where other nonlinear or non-conservative terms should be added later).
+- MPI working -- speedup of about 3.6 for 4 MPI processes on quad-core desktop (perhaps could have turned off or reduced frequency of non-essential callbacks).
+
 
 Code: 
 
@@ -88,6 +87,18 @@ Output (32x32 mesh, polydeg=3):
  Linf error:     2.39927502e-03   9.53772137e-04   7.49090885e-03   8.72255532e-04
 ────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
+
+#### Hyperbolic diffusion
+The hyperbolic equations replace $\nabla u$ (that appears in the diffusive flux) with vector ${\bf G}$, where
+
+$$ \frac{\partial {\bf G}}{\partial t} = \left(\nabla u - {\bf G}\right) / T,$$
+
+where $T$ is some timescale over which the diffusion is hyperbolic. For a steady state the result should be the same as with the elliptic equation. In the hyperbolic solve $T$ can be selected appropriately ![https://doi.org/10.1016/j.jcp.2007.07.029](https://doi.org/10.1016/j.jcp.2007.07.029).
+
+- Need to solve for additional vector field. However, at $64^2$ with lowest order poly, hyperbolic diffusion has timestep around $1/10$ of the parabolic one, and this should scale linearly with number of elements, rather than quadratically.
+- In general with this form, BCs implemented directly on flux. In Trixi, advection uses given boundary value to construct correct flux, which for hyperbolic means providing $u$ and its first partial derivatives at the boundary. Since symbolic expressions have been used, there is some additional expense over parabolic solve in this specific example.  
+- **TODO** Write down errors for lowest order poly (hyperbolic appear slightly smaller than parabolic at $64^2$).
+
 
 ### Meshes
 
