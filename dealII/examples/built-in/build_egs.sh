@@ -31,9 +31,11 @@ clone_repo(){
 
 copy_and_build_eg() {
     # Copy
-    eg_dir="$repo_dir/examples/step-$1"
-    if [ -d "$eg_dir" ]; then
-        rsync_cmd="rsync -av --exclude='doc' $eg_dir $this_dir  &> /dev/null"
+    eg_dir="$this_dir/step-$1"
+    echo $eg_dir
+    src_eg_dir="$repo_dir/examples/step-$1"
+    if [ -d "$src_eg_dir" ]; then
+        rsync_cmd="rsync -av --exclude='doc' $src_eg_dir $this_dir  &> /dev/null"
         eval "$rsync_cmd"
     fi
     # Build
@@ -64,6 +66,6 @@ set_cmake_options
 clone_repo
 
 # Copy egs from the repo and build
-for eg_num in 1; do
+for eg_num in 1 2 3 4 5; do
     copy_and_build_eg "$eg_num"
 done
