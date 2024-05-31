@@ -42,7 +42,7 @@ provides a system of ODEs that are solved using the [OrdinaryDiffEq](https://git
 
 ### Advection test
 
-The advection equations are already implemented as ``LinearScalarAdvectionEquation2D`` and provided as convergence tests. You can provide an advection velocity and construct a structured mesh with ``StructuredMesh``. Unfortunately ``RadauIIA3()`` (the integration scheme provided by [OrdinaryDiffEq](https://github.com/SciML/OrdinaryDiffEq.jl)) crashes the code, so `BS3()` is used instead. With purely horizontal advection and a Gaussian of width $2$, at $t=40$ the solution has $L_2$ error of $2.28576555e-04$ and $L_\infty$ error of $2.13218567e-03$.
+The advection equations are already implemented as ``LinearScalarAdvectionEquation2D`` and provided as convergence tests. You can provide an advection velocity and construct a structured mesh with ``StructuredMesh``. Unfortunately ``RadauIIA3()`` (the integration scheme provided by [OrdinaryDiffEq](https://github.com/SciML/OrdinaryDiffEq.jl)) crashes the code, so `BS3()` is used instead. With purely horizontal advection and a Gaussian of width $2$, at $t=40$ the solution has $L_2$ error of $2.28576555\times 10^{-4}$ and $L_\infty$ error of $2.13218567\times 10^{-3}$.
 Changing the advection angle hardly affects the result. The test completes in under $0.5s$ on my desktop. A script is [here](./simple_tests/simple_advect_periodic_DG/simple_advect_periodic_DG.jl). The result can be readily plotted as follows:
 ```julia
 julia> using Plots;
@@ -95,9 +95,10 @@ $$ \frac{\partial {\bf G}}{\partial t} = \left(\nabla u - {\bf G}\right) / T,$$
 
 where $T$ is some timescale over which the diffusion is hyperbolic. For a steady state the result should be the same as with the elliptic equation. In the hyperbolic solve $T$ can be selected appropriately ![https://doi.org/10.1016/j.jcp.2007.07.029](https://doi.org/10.1016/j.jcp.2007.07.029).
 
-- Need to solve for additional vector field. However, at $64^2$ with lowest order poly, hyperbolic diffusion has timestep around $1/10$ of the parabolic one, and this should scale linearly with number of elements, rather than quadratically.
-- In general with this form, BCs implemented directly on flux. In Trixi, advection uses given boundary value to construct correct flux, which for hyperbolic means providing $u$ and its first partial derivatives at the boundary. Since symbolic expressions have been used, there is some additional expense over parabolic solve in this specific example.  
-- **TODO** Write down errors for lowest order poly (hyperbolic appear slightly smaller than parabolic at $64^2$).
+- Need to solve for additional vector field. However, at $64^2$ with lowest order poly, hyperbolic diffusion has timestep around $1/10$ of the parabolic one, and this should scale linearly with number of elements, rather than quadratically. Code is [here](./simple_tests/aniso_diffusion_DeluzetNarski/hyperbolic/elixir_anisohypdiff_nonperiodic_DN.jl)
+- In general with this form, BCs implemented directly on flux. In Trixi, advection uses given boundary value to construct correct flux, which for hyperbolic means providing $u$ and its first partial derivatives at the boundary. Since symbolic expressions have been used, there is some additional expense over parabolic solve in this specific example.
+- Tested with domain shift so that magnetic field intersects boundary at shallower angle (but should do with simpler test). No apparent problems and error is not large near boundary compared with interior.
+- **TODO** Write down errors for lowest order poly (hyperbolic appear slightly smaller than parabolic at $64^2$ and decreases with increasing resolution).
 
 
 ### Meshes
