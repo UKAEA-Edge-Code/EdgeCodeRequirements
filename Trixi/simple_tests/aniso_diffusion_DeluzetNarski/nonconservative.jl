@@ -4,7 +4,7 @@
 #
 using Trixi
 using Trixi: AbstractEquations, Gradient, Divergence
-import Trixi: varnames, default_analysis_integrals, have_nonconservative_terms
+import Trixi: varnames, default_analysis_integrals, flux, have_nonconservative_terms
 
 #
 # variable coefficient equations
