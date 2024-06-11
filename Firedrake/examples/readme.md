@@ -64,12 +64,12 @@ Evolve counter-propagating v-space Gaussian beams to steady state, repulsive ele
 
 Theory and equations solved are described in https://github.com/ExCALIBUR-NEPTUNE/Documents/blob/main/reports/ukaea_reports/CD-EXCALIBUR-FMS0066-M4.1.pdf.
 
-Discretization: $64$ by $256$ square quads, second-order, DG for advected density, CG for advection velocity and electrostatic potential.
-Boundary conditions: periodic in space direction.  Probably homogeneous Neumann at ends of velocity direction.
-Time-stepper: RadauIIA(1).
-Initial data: pair of counter-propagating Gaussian beams.
-Analytic solution: not known, dispersion for initial instability growth is analytic.  A nonlinear analytic solution is known for the case of an attractive force, see Appendix A of https://github.com/ExCALIBUR-NEPTUNE/Documents/blob/main/reports/ukaea_reports/CD-EXCALIBUR-FMS0074-M6c.3.pdf.
-Other notes: needs Irksome.  Uses `project' functionality of Firedrake on extruded mesh - currently this is only able to do 1D1V kinetics (limitation of framework).
+Discretization: $64$ by $256$ square quads, second-order, DG for advected density, CG for advection velocity and electrostatic potential.\
+Boundary conditions: periodic in space direction.  Probably homogeneous Neumann at ends of velocity direction.\
+Time-stepper: RadauIIA(1).\
+Initial data: pair of counter-propagating Gaussian beams.\
+Analytic solution: not known, dispersion for initial instability growth is analytic.  A nonlinear analytic solution is known for the case of an attractive force, see Appendix A of https://github.com/ExCALIBUR-NEPTUNE/Documents/blob/main/reports/ukaea_reports/CD-EXCALIBUR-FMS0074-M6c.3.pdf.\
+Other notes: needs Irksome.  Uses `project' functionality of Firedrake on extruded mesh - currently this is only able to do 1D1V kinetics (limitation of framework).\
 
 ![1D1V_twostream_output](png/twostream.png "The particle distribution in the steady state.")
 
