@@ -69,7 +69,7 @@ Boundary conditions: periodic in space direction.  Probably homogeneous Neumann 
 Time-stepper: RadauIIA(1).\
 Initial data: pair of counter-propagating Gaussian beams.\
 Analytic solution: not known, dispersion for initial instability growth is analytic.  A nonlinear analytic solution is known for the case of an attractive force, see Appendix A of https://github.com/ExCALIBUR-NEPTUNE/Documents/blob/main/reports/ukaea_reports/CD-EXCALIBUR-FMS0074-M6c.3.pdf.\
-Other notes: needs Irksome.  Uses `project' functionality of Firedrake on extruded mesh - currently this is only able to do 1D1V kinetics (limitation of framework).\
+Other notes: needs Irksome.  Uses `project' functionality of Firedrake on extruded mesh - currently this is only able to do 1D1V kinetics (limitation of framework).  Output figure shows a higher res grid than that in the uploaded script.  Analytic dispersion relation has to be inverted using e.g. Newton-Raphson.\
 
 ![1D1V_twostream_output](png/twostream.png "The particle distribution in the steady state.")
 
