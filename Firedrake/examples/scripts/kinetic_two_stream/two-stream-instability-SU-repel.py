@@ -106,7 +106,7 @@ while float(t) < float(T):
 
     solve(Lphi==Rphi, phi_s, solver_parameters=params)
     driftvel.interpolate(as_vector([-(y-4.0), grad(phi_s)[0]]))
-    energy = assemble((inner(grad(phi_s),grad(phi_s)))*dx)
+    energy = assemble(0.0625*(inner(grad(phi_s),grad(phi_s)))*dx)  # 1/2 cos energy growth rate is twice mode growth rate; 1/8 to cancel extent of velocity space
     energydatfile.write(str(float(t))+", "+str(energy)+"\n")
 
     if(cnt % 40 == 0):
