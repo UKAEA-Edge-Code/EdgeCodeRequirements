@@ -57,3 +57,11 @@ Analytic solution: not known for time-evolution, final state is $n=1+\sqrt{1-x^2
 Other notes: needs Irksome (Runge-Kutta steppers for Firedrake).  There are other ways to do this problem e.g. using only CG elements with streamline-upwind suppression of numerical oscillations.
 
 ![1D_compressible_Euler_DG](png/SOL_1D_DG_upwind_irksome.png "Frames from time-evolution of the initial state to the steady-state.")
+
+# 5. 1D1V kinetic two-stream instability
+
+Time-evolve counter-propagating particle beams of like charge in a non-dynamical neutralizing background.
+
+
+
+
