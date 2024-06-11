@@ -60,7 +60,7 @@ Other notes: needs Irksome (Runge-Kutta steppers for Firedrake).  There are othe
 
 # 5. 1D1V kinetic two-stream instability
 
-Evolve counter-propagating v-space Gaussian beams to steady state, repulsive electrostatic interaction in non-dynamical neutralizing background.  Linear phase of instability mode growth can be verified against analytic dispersion relation (see figure).
+Evolve counter-propagating v-space Gaussian beams to steady state, repulsive electrostatic interaction in non-dynamical neutralizing background.  Linear phase of instability mode growth can be verified against analytic dispersion relation (see figure, in which $k=n \pi$).
 
 Theory and equations solved are described in https://github.com/ExCALIBUR-NEPTUNE/Documents/blob/main/reports/ukaea_reports/CD-EXCALIBUR-FMS0066-M4.1.pdf.
 
