@@ -67,6 +67,43 @@ options:
                         Save data files for ParaView (paraview.org) visualization.
 ```
 
+## Diffusion Solver
+An anisotropic diffusion solver was written in C++ with MFEM in
+[diffusion.cpp](./diffusion.cpp). It requires MFEM to already have
+been built and installed, but for the source still to be available as
+well. It can be compiled with the command `make
+MFEM_SOURCE_DIR=/path/mfem/source`. The simulation can be varied using
+the following command-line options:
+
+```
+Usage: ./diffusion [options] ...
+Options:
+   -h, --help
+	Print this help message and exit.
+   -m <string>, --mesh <string>, current value: square.msh
+	Mesh file to use.
+   -o <int>, --order <int>, current value: 1
+	Finite element order (polynomial degree) or -1 for isoparametric space.
+   -sc, --static-condensation, -no-sc, --no-static-condensation, current option: --no-static-condensation
+	Enable static condensation.
+   -pa, --partial-assembly, -no-pa, --no-partial-assembly, current option: --no-partial-assembly
+	Enable Partial Assembly.
+   -fa, --full-assembly, -no-fa, --no-full-assembly, current option: --no-full-assembly
+	Enable Full Assembly.
+   -eps <double>, --epsilon <double>, current value: 0.1
+	Ratio between perpendicular and parallel diffusivity.
+   -a <double>, --alpha <double>, current value: 2
+	Alpha parameter for magnetic field.
+   -mp <double>, --m-param <double>, current value: 1
+	m parameter for magnetic field.
+   -d <string>, --device <string>, current value: cpu
+	Device configuration string, see Device::Configure().
+   -vis, --visualization, -no-vis, --no-visualization, current option: --visualization
+	Enable or disable GLVis visualization.
+   -paraview, --paraview-datafiles, -no-paraview, --no-paraview-datafiles, current option: --no-paraview-datafiles
+	Save data files for ParaView visualization.
+```
+
 ## General Impressions
 
 The documentation, tutorials, and examples for MFEM are pretty
@@ -89,8 +126,9 @@ MFEM appears to be under active development, with pull requests being
 opened and approved regularly. However, I've been told that it often
 takes about a month for a PR to be approved.
 
-There is currently support for CUDA. A PR exists to add SYCL support,
-but it was not merged in time for the most recent release.
+There is currently support for CUDA and HIP. A PR exists to add SYCL
+support, but it was not merged in time for the most recent release and
+is now very far behind the `main` branch.
 
 Hanging/nonconformal nodes are supported, but this is in the context
 of mesh refinement. It appears the **hanging nodes need to be on an edge
@@ -101,6 +139,12 @@ unclear how difficult it would be to add support for this.
 MFEM only seems to support up to 3 dimensions. It does not look like
 velocity space is supported.
 
+There is a "miniapp" providing automatic differentiation. However, it
+is not particularly easy to use and is not integrated into the core of
+MFEM. When the miniapps are installed by `spack`, the automatic
+differentiation headers end up containing broken include paths. There
+are likely better 3rd party library for this.
+
 There are unit tests but no information on coverage that I can
 see. There do not appear to be integration tests. The examples could
 in principle act as regression tests but they don't appear to be run
@@ -108,7 +152,14 @@ as part of CI.
 
 The PyMFEM bindings are fairly low-level and not entirely
 Pythonic. It's possible to end up with dangling pointers if the owner
-of an object gets garbage-collected, leading to segfaults.
+of an object gets garbage-collected, leading to segfaults. This can
+lead to difficult bugs.
+
+Working with MFEM in C++ comes with the usual headaches of that
+language. The containers provided by MFEM do not provide
+bounds-checking, so memory errors can happen easily and lead to
+strange/unreproducible behaviour. Raw pointers are used surprisingly
+often, which could lead to problems.
 
 ## Installation
 
