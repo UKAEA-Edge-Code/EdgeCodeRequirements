@@ -5,3 +5,8 @@ advection.mesh
 *.pvd
 *.pvtu
 *.vtu
+*.o
+MFEM/*.mesh
+MFEM/diffusion
+MFEM/compile_commands.json
+.ccls-cache
