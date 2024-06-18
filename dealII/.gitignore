@@ -1,3 +1,4 @@
 .spack-env
+builds
 spack.lock
 views
