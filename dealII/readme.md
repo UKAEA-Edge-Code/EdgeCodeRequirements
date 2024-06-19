@@ -20,14 +20,16 @@ L2 error at t=40 is 0.00186541.
 <img src="examples/advectionDG/postproc/dealii_advection_DG.gif" width="600">
 
 
-### Anisotropic Diffusion
+### Anisotropic Diffusion ([aniso_diff.cc](examples/anisotropic_diffusion/aniso_diff.cc))
 
 WIP
-<!-- ### Anisotropic Diffusion ([aniso_diffusion_DeluzetNarski.py](examples/aniso_diffusion/aniso_diffusion_DeluzetNarski.py)) -->
+- ToDO
+  - Try PETSc solvers 
+  - Calc L2 error
 
-<!-- <img src="examples/aniso_diffusion/output/aniso_diffa0_m0_4bcs_160x160.png" width="400" style="margin-right: 1.5rem">
-<img src="examples/aniso_diffusion/output/aniso_diffa2_m1_4bcs_160x160.png" width="400" style="margin-right: 1.5rem">
-<img src="examples/aniso_diffusion/output/aniso_diffa2_m10_4bcs_160x160.png" width="400" style="margin-right: 1.5rem"> -->
+<img src="examples/anisotropic_diffusion/output/aniso_diffa0_m0_4bcs_256x256.png" width="400" style="margin-right: 1.5rem">
+<img src="examples/anisotropic_diffusion/output/aniso_diffa2_m1_4bcs_256x256.png" width="400" style="margin-right: 1.5rem">
+<img src="examples/anisotropic_diffusion/output/aniso_diffa2_m10_4bcs_256x256.png" width="400" style="margin-right: 1.5rem">
 
 
 ### 1D outflow isothermal compressible Euler
