@@ -62,6 +62,7 @@ WIP
 - Some CUDA support
 - Some Kokkos support
 - Reads gmsh
+- Higher dimensional problems with ['hyperdeal'](https://github.com/hyperdeal/hyperdeal/tree/master)  (e.g.[3D3V Vlasov-Poisson](https://arxiv.org/abs/2002.08110) )
 
 <!-- 
 ### General observations
