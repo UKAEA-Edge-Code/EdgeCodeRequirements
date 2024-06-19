@@ -553,6 +553,16 @@ template <int dim> void AnisotropicDiffusion<dim>::solve_system() {
 
   solver.solve(this->system_matrix, this->solution, this->system_rhs,
                preconditioner);
+
+  Vector<double> err_per_cell(this->triangulation.n_active_cells());
+  VectorTools::integrate_difference(
+      this->dof_handler, this->solution,
+      ExactSln(this->alpha, this->m, this->eps), err_per_cell,
+      QGauss<dim>(this->fe.degree + 1), VectorTools::L2_norm);
+  const double L2_error = VectorTools::compute_global_error(
+      triangulation, err_per_cell, VectorTools::L2_norm);
+
+  deallog << "L2 err = " << L2_error;
 }
 
 template <int dim>

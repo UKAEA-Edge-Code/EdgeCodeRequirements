@@ -25,12 +25,12 @@ L2 error at t=40 is 0.00186541.
 WIP
 - ToDO
   - Try PETSc solvers 
-  - Calc L2 error
 
 <img src="examples/anisotropic_diffusion/output/aniso_diffa0_m0_4bcs_256x256.png" width="400" style="margin-right: 1.5rem">
 <img src="examples/anisotropic_diffusion/output/aniso_diffa2_m1_4bcs_256x256.png" width="400" style="margin-right: 1.5rem">
 <img src="examples/anisotropic_diffusion/output/aniso_diffa2_m10_4bcs_256x256.png" width="400" style="margin-right: 1.5rem">
 
+L2 errors are 0.0362799, 0.0345539 and 0.371597 respectively.
 
 ### 1D outflow isothermal compressible Euler
 <!-- ### 1D outflow isothermal compressible Euler ([SOL1D_DG.py](examples/1doutflow/SOL1D_DG.py)) -->
