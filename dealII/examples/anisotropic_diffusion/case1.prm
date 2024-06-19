@@ -1,0 +1,23 @@
+subsection FEM
+  # Basis function degree
+  set degree = 1
+  # Number of times to refine square mesh
+  set nref = 9
+end
+
+subsection solver
+  # Solver type
+  set type = bicgstab
+  # Preconditioner type
+  set preconditioner = ssor
+  # Relative tolerance
+  set rtol = 1e-12
+  # Max number of iterations
+  set nit = 1000
+end
+
+subsection Phys
+  set alpha = 0.0
+  set m = 0.0
+  set epsilon = 0.1
+end
