@@ -98,8 +98,8 @@ L2 error at t=40 is 0.00186541.
 ### Anisotropic Diffusion ([aniso_diff.cc](examples/anisotropic_diffusion/aniso_diff.cc))
 
 More or less works, but the solutions are quite poor, particularly for the a=2, m=10 case.
-Quite a lot of effort way required even to get to this stage...
-It might be possible to get beeter results with the PETSc solvers but that would appear to require quite a bit of code to be rewritten.
+Quite a lot of effort was required, even to get to this stage...
+It might be possible to get better results with the PETSc solvers but doing so would appear to require a rewrite to accommodate different storage classes.
 
 <img src="examples/anisotropic_diffusion/output/aniso_diffa0_m0_4bcs_256x256.png" width="350" style="margin-right: 1.5rem">
 <img src="examples/anisotropic_diffusion/output/aniso_diffa2_m1_4bcs_256x256.png" width="350" style="margin-right: 1.5rem">
@@ -107,22 +107,15 @@ It might be possible to get beeter results with the PETSc solvers but that would
 
 L2 errors are 0.0362799, 0.0345539 and 0.371597 respectively.
 
-## Other Notes
+## Installation
 
-### Installation
-
-Many options exist. The spack install takes a long time (installs llvm) and had a minor gotcha, but worked after some tinkering.
+Many options exist. The spack install takes a long time (installs llvm) and had a minor gotcha, but worked after some tinkering (encapsulated [here](./spack.yaml)).
 Installed via the `spack.yaml` in this dir with:
 ```
 spack env activate . -p
 spack install -j 8
 ```
 The advertised "--test=root" option failed for me.
-
-### Gripes
-Open pull, closed push, so need an accounr on their gitlab server.
-Quite a lot of boilerplate in application code.
-Fairly low level API? Based on the first few egs, anyway.
 
 ## Links
 
