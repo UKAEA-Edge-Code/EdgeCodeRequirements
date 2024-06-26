@@ -10,6 +10,13 @@ Description from the [deal.II project page](https://fenicsproject.org/):
 
 N.B. The following is based on deal.ii version 9.4.0 (latest version that worked with spack install).
 
+Overall:
+ - Mature framework with a large and active development community.
+ - Lots of dependencies, but build process for framework and dependent apps is straighforward.
+ - Has a Python interface, but coverage is fairly sparse at the moment, so development pace would be C++-limited.
+ - C++ API is fairly low level, making it highly configurable, but easy to get wrong and not that intuitive.
+ - Already has all the main required features in some form.
+
 ### Community
 Summary: Mature framework with a large and active development community.
 
