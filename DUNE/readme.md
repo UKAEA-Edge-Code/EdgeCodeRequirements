@@ -11,7 +11,7 @@ Description from the [DUNE project page](https://www.dune-project.org/):
 ## Review
 
 The comments in this section apply to the DUNE-fem module and its Python bindings (`dune-fempy`) unless otherwise specified.
-Version 2.10.dev20240316 was reviewed, which was the latest version that installed succesfully with pip at the time of testing.
+Version 2.10.dev20240316 was reviewed, which was the latest version that installed successfully with pip at the time of testing.
 
 Overall:
 - Lacks some key features, including support for GPUs, particles and higher dimensions.
@@ -29,7 +29,7 @@ Pros:
 
 Cons:
 - Couldn't find much evidence of user support online (forum responses etc.).
-- dune-fem development team appears to be relatively small: 3 regular contributors over the last year or so (all are also contributors to dune core modules).
+- dune-fem development team appears to be relatively small: 3 regular contributors over the last year or so (all are also contributors to DUNE core modules).
 - Not aware of any experienced DUNE users in-house or among UKAEA collaborators.
 
 ### Ease of development
@@ -73,7 +73,7 @@ Cons:
 Summary: Claims to handle CG and DG (but the latter was difficult to get working in practice). Lacks some other important features, particularly higher dimension support, particles. Range of timesteppers might be quite limited.
 
 Pros:
-- Just-in-time compiling of C++ code in Python apps. Allows easy testing of production code in productivity framework.
+- Just-in-time compiling of C++ code in Python apps allows easy testing of production code in productivity framework.
 - On-the-fly plotting of fields helps with debugging.
 - Supports CG and DG.
 - Supports elliptic solves.
@@ -86,6 +86,8 @@ Cons:
 - No particles.
 
 ## Examples
+
+For problem descriptions and equations see the [Firedrake examples readme](../Firedrake/examples/readme.md).
 
 ### CG advection ([simple_advect_periodic_CG.py](examples/simple_advection/simple_advect_periodic_CG.py))
 
@@ -101,6 +103,8 @@ Unfinished.
 
 ### Anisotropic Diffusion ([aniso_diffusion_DeluzetNarski.py](examples/aniso_diffusion/aniso_diffusion_DeluzetNarski.py))
 
+Decent results
+
 <img src="examples/aniso_diffusion/output/aniso_diffa0_m0_4bcs_160x160.png" width="400" style="margin-right: 1.5rem">
 <img src="examples/aniso_diffusion/output/aniso_diffa2_m1_4bcs_160x160.png" width="400" style="margin-right: 1.5rem">
 <img src="examples/aniso_diffusion/output/aniso_diffa2_m10_4bcs_160x160.png" width="400" style="margin-right: 1.5rem">
@@ -112,7 +116,7 @@ Unfinished.
 
 ### Non-conforming mesh ([non-conforming.py](examples/non-conformal_mesh/non-conforming.py))
 
-Attempt to read a non-conforming mesh and run a simple problem. Couldn't get this to work (see review comments re. non-conforming meshes).
+Attempt to read a non-conforming mesh and run a simple problem. Couldn't get this to work (but see review comments re. non-conforming meshes).
 
 
 
