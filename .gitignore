@@ -6,5 +6,5 @@ advection.mesh
 *.pvtu
 *.vtu
 
-# IDE configs
+# IDEs
 .vscode
