@@ -1,0 +1,18 @@
+spack:
+  specs:
+  # The hdf5 variant builds, but dependent code tries to link with the wrong lib name (-lhdf5-shared); skipping it for now.
+  # Also drops the suggested ~netcdf from trilinos - that variant doesnt' seem to exist
+  - dealii~hdf5 ^boost@1.72.0 ^mumps@5.2.0 ^trilinos~exodus
+  view:
+    gcc:
+      root: views/gcc
+      select: ['%gcc']
+      link_type: symlink
+  concretizer:
+    unify: when_possible
+  repos:
+    - $spack/var/spack/repos/builtin
+  packages:
+    all:
+      providers:
+        mpi: [mpich, openmpi]
