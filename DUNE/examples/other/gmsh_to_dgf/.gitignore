@@ -1,0 +1,2 @@
+# Ignore mesh file (generate it from Firedrake eg)
+unit_square.dgf

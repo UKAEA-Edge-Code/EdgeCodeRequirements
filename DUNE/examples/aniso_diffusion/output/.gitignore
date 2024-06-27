@@ -1,0 +1,6 @@
+*
+# Track only these files
+!.gitignore
+!aniso_diffa0_m0_4bcs_160x160.png
+!aniso_diffa2_m1_4bcs_160x160.png
+!aniso_diffa2_m10_4bcs_160x160.png

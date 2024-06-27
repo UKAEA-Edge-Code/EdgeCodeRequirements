@@ -1,0 +1,9 @@
+dune.grid
+dune-fem-dg==2.10.dev20240316
+dune-fem==2.10.dev20240316
+dune-polygongrid==2.10.dev20240316
+dune-spgrid==2.10.dev20240316
+matplotlib
+mayavi
+meshio==5.3.5
+mpi4py

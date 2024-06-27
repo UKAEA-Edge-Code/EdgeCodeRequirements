@@ -1,0 +1,28 @@
+DGF
+
+Interval
+-1 -1   % first corner
+1 1   % second corner
+40 40   % 4 cells in each direction (x, y)
+#
+
+%Simplexgenerator
+%min-angle 30    % quality enhancment
+%max-area 0.001   % area restriction
+%display 0       % show result using Triangle viewer
+% to use Triangle from a certain path, uncomment this path line
+%path $HOME/bin
+
+
+Simplex
+#
+
+BoundaryDomain
+default 1    % all boundaries have id 1
+#
+
+GridParameter
+name 2d_Unit_Cube
+#
+
+# unitcube2.dgf
